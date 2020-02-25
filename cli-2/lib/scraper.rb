@@ -101,9 +101,13 @@ class Scraper
     page.css(".bqLn").css('a').each do |f|
       name = f.css('.authorContentName').text
       author = Author.search_or_new(name)
-      
+      top_authors_arr << author
     end
-    binding.pry
+    top_authors_arr.each do |listing|
+      if listing.type
+        top_authors_arr.delete(listing)
+      end
+    end
     top_authors_arr
   end
 end
